@@ -145,6 +145,11 @@ public class Main extends JavaPlugin {
         stableblocks.add(Material.SNOW);
         stableblocks.add(Material.END_PORTAL_FRAME);
         stableblocks.add(Material.END_PORTAL);
+        stableblocks.add(Material.END_GATEWAY);
+        stableblocks.add(Material.END_ROD);
+        stableblocks.add(Material.CHORUS_FLOWER);
+        stableblocks.add(Material.CHORUS_FRUIT);
+        stableblocks.add(Material.CHORUS_PLANT);
 
         unstableblocks.add(Material.AIR);
         unstableblocks.add(Material.WATER);
