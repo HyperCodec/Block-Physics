@@ -149,7 +149,7 @@ public class Main extends JavaPlugin {
         unstableblocks.add(Material.LAVA);
         unstableblocks.add(Material.CAVE_AIR);
 
-        this.getLogger().info("Block Physics v1.1 loaded");
+        this.getLogger().info("Block Physics v1.2 loaded");
     }
     public static void updateNearbyBlocks(Block block, boolean includeself, UUID uuid) {
         new BukkitRunnable() {
