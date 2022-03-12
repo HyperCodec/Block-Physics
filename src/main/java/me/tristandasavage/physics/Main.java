@@ -143,6 +143,8 @@ public class Main extends JavaPlugin {
         stableblocks.add(Material.SCAFFOLDING);
         stableblocks.add(Material.LEVER);
         stableblocks.add(Material.SNOW);
+        stableblocks.add(Material.END_PORTAL_FRAME);
+        stableblocks.add(Material.END_PORTAL);
 
         unstableblocks.add(Material.AIR);
         unstableblocks.add(Material.WATER);
