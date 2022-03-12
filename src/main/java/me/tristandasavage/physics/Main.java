@@ -179,7 +179,6 @@ public class Main extends JavaPlugin {
                         if(plugin.getConfig().getInt("maxaffectedblocks") != 0 && iterations.get(uuid) > plugin.getConfig().getInt("maxaffectedblocks")) {
                             return;
                         }
-                        plugin.getLogger().info("Iteration #" + iterations.get(uuid) + " for " + uuid);
                         BlockData data = nblock.getBlockData();
                         nblock.setType(Material.AIR);
                         nblock.getWorld().spawnFallingBlock(nblock.getLocation().add(0.5, 0.5, 0.5), data);
