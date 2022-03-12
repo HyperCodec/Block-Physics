@@ -1,1 +1,2 @@
 maxaffectedblocks: 5000 # The maximum amount of blocks changed before it stops (0 for infinite, which is rlly laggy)
+fallingblocksupdate: true # Whether or not the falling blocks landing can cause stuff to fall (a bit laggy)

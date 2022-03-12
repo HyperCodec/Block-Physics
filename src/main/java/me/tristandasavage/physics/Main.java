@@ -2,8 +2,11 @@ package me.tristandasavage.physics;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.entity.FallingBlock;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -137,6 +140,9 @@ public class Main extends JavaPlugin {
         stableblocks.add(Material.RED_BED);
         stableblocks.add(Material.YELLOW_BED);
         stableblocks.add(Material.CACTUS);
+        stableblocks.add(Material.SCAFFOLDING);
+        stableblocks.add(Material.LEVER);
+        stableblocks.add(Material.SNOW);
 
         unstableblocks.add(Material.AIR);
         unstableblocks.add(Material.WATER);
@@ -146,9 +152,6 @@ public class Main extends JavaPlugin {
         this.getLogger().info("Block Physics v1.1 loaded");
     }
     public static void updateNearbyBlocks(Block block, boolean includeself, UUID uuid) {
-        if(plugin.getConfig().getInt("maxaffectedblocks") != 0 && iterations.get(uuid) > plugin.getConfig().getInt("maxaffectedblocks")) {
-            return;
-        }
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -181,7 +184,8 @@ public class Main extends JavaPlugin {
                         }
                         BlockData data = nblock.getBlockData();
                         nblock.setType(Material.AIR);
-                        nblock.getWorld().spawnFallingBlock(nblock.getLocation().add(0.5, 0.5, 0.5), data);
+                        FallingBlock fblock = nblock.getWorld().spawnFallingBlock(nblock.getLocation().add(0.5, 0.5, 0.5), data);
+                        fblock.getPersistentDataContainer().set(new NamespacedKey(plugin, "eventid"), PersistentDataType.STRING, uuid.toString());
                         updateNearbyBlocks(nblock, false, uuid);
                     }
                 }
