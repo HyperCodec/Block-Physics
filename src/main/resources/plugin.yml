@@ -1,0 +1,6 @@
+name: Block-Physics
+main: me.tristandasavage.physics.Main
+version: 1.1
+author: TristanDaSavage
+api-version: 1.18
+description: "Makes blocks act like sand"

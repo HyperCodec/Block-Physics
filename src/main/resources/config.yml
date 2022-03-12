@@ -1,0 +1,1 @@
+maxaffectedblocks: 5000 # The maximum amount of blocks changed before it stops (0 for infinite, which is rlly laggy)
