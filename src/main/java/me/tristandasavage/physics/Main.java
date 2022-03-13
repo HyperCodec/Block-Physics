@@ -55,7 +55,6 @@ public class Main extends JavaPlugin {
         stableblocks.add(Material.CAMPFIRE);
         stableblocks.add(Material.SOUL_CAMPFIRE);
         stableblocks.add(Material.LECTERN);
-        stableblocks.add(Material.GLOW_LICHEN);
         stableblocks.add(Material.VINE);
         stableblocks.add(Material.COBWEB);
         stableblocks.add(Material.RAIL);
@@ -63,7 +62,6 @@ public class Main extends JavaPlugin {
         stableblocks.add(Material.DETECTOR_RAIL);
         stableblocks.add(Material.POWERED_RAIL);
         stableblocks.add(Material.CHAIN);
-        stableblocks.add(Material.POINTED_DRIPSTONE);
         stableblocks.add(Material.FLOWER_POT);
         stableblocks.add(Material.FLOWERING_AZALEA);
         stableblocks.add(Material.AZALEA);
@@ -155,6 +153,11 @@ public class Main extends JavaPlugin {
         unstableblocks.add(Material.WATER);
         unstableblocks.add(Material.LAVA);
         unstableblocks.add(Material.CAVE_AIR);
+        stableblocks.add(Material.POINTED_DRIPSTONE);
+        stableblocks.add(Material.GLOW_BERRIES);
+        stableblocks.add(Material.GLOW_LICHEN);
+        stableblocks.add(Material.SPORE_BLOSSOM);
+        stableblocks.add(Material.HANGING_ROOTS);
 
         this.getLogger().info("Block Physics v1.2 loaded");
     }

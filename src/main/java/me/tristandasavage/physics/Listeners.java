@@ -19,13 +19,15 @@ public class Listeners implements Listener {
         if(!event.isCancelled()) {
             UUID uuid = UUID.randomUUID();
             Main.iterations.put(uuid, 0);
-            new BukkitRunnable() {
-                @Override
-                public void run() {
-                    Main.iterations.remove(uuid);
-                    this.cancel();
-                }
-            }.runTaskLater(Main.plugin, Main.plugin.getConfig().getInt("maxaffectedblocks") + 20);
+            if(Main.plugin.getConfig().getInt("maxaffectedblocks") != 0) {
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        Main.iterations.remove(uuid);
+                        this.cancel();
+                    }
+                }.runTaskLater(Main.plugin, Main.plugin.getConfig().getInt("maxaffectedblocks") + 20);
+            }
             Main.updateNearbyBlocks(event.getBlock(), true, uuid);
         }
     }
@@ -34,13 +36,15 @@ public class Listeners implements Listener {
         if(!event.isCancelled()) {
             UUID uuid = UUID.randomUUID();
             Main.iterations.put(uuid, 0);
-            new BukkitRunnable() {
-                @Override
-                public void run() {
-                    Main.iterations.remove(uuid);
-                    this.cancel();
-                }
-            }.runTaskLater(Main.plugin, Main.plugin.getConfig().getInt("maxaffectedblocks") + 20);
+            if(Main.plugin.getConfig().getInt("maxaffectedblocks") != 0) {
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        Main.iterations.remove(uuid);
+                        this.cancel();
+                    }
+                }.runTaskLater(Main.plugin, Main.plugin.getConfig().getInt("maxaffectedblocks") + 20);
+            }
             Main.updateNearbyBlocks(event.getBlock(), false, uuid);
         }
     }
@@ -49,13 +53,15 @@ public class Listeners implements Listener {
         if (!event.isCancelled() && event.getEntity() instanceof FallingBlock) {
             if (event.getEntity().getPersistentDataContainer().has(new NamespacedKey(Main.plugin, "eventid"), PersistentDataType.STRING) && Main.plugin.getConfig().getBoolean("fallingblocksupdate")) {
                 UUID uuid = UUID.fromString(event.getEntity().getPersistentDataContainer().get(new NamespacedKey(Main.plugin, "eventid"), PersistentDataType.STRING));
-                new BukkitRunnable() {
-                    @Override
-                    public void run() {
-                        Main.iterations.remove(uuid);
-                        this.cancel();
-                    }
-                }.runTaskLater(Main.plugin, Main.plugin.getConfig().getInt("maxaffectedblocks") + 20);
+                if(Main.plugin.getConfig().getInt("maxaffectedblocks") != 0) {
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            Main.iterations.remove(uuid);
+                            this.cancel();
+                        }
+                    }.runTaskLater(Main.plugin, Main.plugin.getConfig().getInt("maxaffectedblocks") + 20);
+                }
                 Main.updateNearbyBlocks(event.getBlock(), false, uuid);
             }
         }
