@@ -148,6 +148,7 @@ public class Main extends JavaPlugin {
         stableblocks.add(Material.CHORUS_FLOWER);
         stableblocks.add(Material.CHORUS_FRUIT);
         stableblocks.add(Material.CHORUS_PLANT);
+        stableblocks.add(Material.SPAWNER);
 
         unstableblocks.add(Material.AIR);
         unstableblocks.add(Material.WATER);
@@ -158,6 +159,37 @@ public class Main extends JavaPlugin {
         stableblocks.add(Material.GLOW_LICHEN);
         stableblocks.add(Material.SPORE_BLOSSOM);
         stableblocks.add(Material.HANGING_ROOTS);
+        stableblocks.add(Material.BRAIN_CORAL);
+        stableblocks.add(Material.TUBE_CORAL);
+        stableblocks.add(Material.BUBBLE_CORAL);
+        stableblocks.add(Material.DEAD_BRAIN_CORAL);
+        stableblocks.add(Material.DEAD_FIRE_CORAL);
+        stableblocks.add(Material.FIRE_CORAL);
+        stableblocks.add(Material.HORN_CORAL);
+        stableblocks.add(Material.DEAD_HORN_CORAL);
+        stableblocks.add(Material.DEAD_TUBE_CORAL);
+        stableblocks.add(Material.DEAD_BUBBLE_CORAL);
+        stableblocks.add(Material.BRAIN_CORAL_FAN);
+        stableblocks.add(Material.TUBE_CORAL_FAN);
+        stableblocks.add(Material.BUBBLE_CORAL_FAN);
+        stableblocks.add(Material.DEAD_BRAIN_CORAL_FAN);
+        stableblocks.add(Material.DEAD_FIRE_CORAL_FAN);
+        stableblocks.add(Material.FIRE_CORAL_FAN);
+        stableblocks.add(Material.HORN_CORAL_FAN);
+        stableblocks.add(Material.DEAD_HORN_CORAL_FAN);
+        stableblocks.add(Material.DEAD_TUBE_CORAL_FAN);
+        stableblocks.add(Material.DEAD_BUBBLE_CORAL_FAN);
+        stableblocks.add(Material.BRAIN_CORAL_WALL_FAN);
+        stableblocks.add(Material.TUBE_CORAL_WALL_FAN);
+        stableblocks.add(Material.BUBBLE_CORAL_WALL_FAN);
+        stableblocks.add(Material.DEAD_BRAIN_CORAL_WALL_FAN);
+        stableblocks.add(Material.DEAD_FIRE_CORAL_WALL_FAN);
+        stableblocks.add(Material.FIRE_CORAL_WALL_FAN);
+        stableblocks.add(Material.HORN_CORAL_WALL_FAN);
+        stableblocks.add(Material.DEAD_HORN_CORAL_WALL_FAN);
+        stableblocks.add(Material.DEAD_TUBE_CORAL_WALL_FAN);
+        stableblocks.add(Material.DEAD_BUBBLE_CORAL_WALL_FAN);
+
 
         this.getLogger().info("Block Physics v1.2 loaded");
     }
