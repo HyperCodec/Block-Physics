@@ -55,7 +55,6 @@ public class Main extends JavaPlugin {
         stableblocks.add(Material.CAMPFIRE);
         stableblocks.add(Material.SOUL_CAMPFIRE);
         stableblocks.add(Material.LECTERN);
-        stableblocks.add(Material.VINE);
         stableblocks.add(Material.COBWEB);
         stableblocks.add(Material.RAIL);
         stableblocks.add(Material.ACTIVATOR_RAIL);
@@ -189,9 +188,10 @@ public class Main extends JavaPlugin {
         stableblocks.add(Material.DEAD_HORN_CORAL_WALL_FAN);
         stableblocks.add(Material.DEAD_TUBE_CORAL_WALL_FAN);
         stableblocks.add(Material.DEAD_BUBBLE_CORAL_WALL_FAN);
+        stableblocks.add(Material.VINE);
+        stableblocks.add(Material.DEAD_BUSH);
 
-
-        this.getLogger().info("Block Physics v1.2 loaded");
+        this.getLogger().info("Block Physics v1.3 loaded");
     }
     public static void updateNearbyBlocks(Block block, boolean includeself, UUID uuid) {
         new BukkitRunnable() {
