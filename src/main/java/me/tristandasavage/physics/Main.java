@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.block.data.Snowable;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -225,7 +226,13 @@ public class Main extends JavaPlugin {
                             return;
                         }
                         BlockData data = nblock.getBlockData();
+
+                        if(data instanceof Snowable) {
+                            ((Snowable) data).setSnowy(false);
+                        }
+
                         nblock.setType(Material.AIR);
+
                         FallingBlock fblock = nblock.getWorld().spawnFallingBlock(nblock.getLocation().add(0.5, 0.5, 0.5), data);
                         fblock.getPersistentDataContainer().set(new NamespacedKey(plugin, "eventid"), PersistentDataType.STRING, uuid.toString());
                         updateNearbyBlocks(nblock, false, uuid);
