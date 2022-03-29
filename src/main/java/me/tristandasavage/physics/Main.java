@@ -231,6 +231,10 @@ public class Main extends JavaPlugin {
                             ((Snowable) data).setSnowy(false);
                         }
 
+                        if(data.getMaterial() == Material.POWDER_SNOW) {
+                            data = Material.SNOW_BLOCK.createBlockData();
+                        }
+
                         nblock.setType(Material.AIR);
 
                         FallingBlock fblock = nblock.getWorld().spawnFallingBlock(nblock.getLocation().add(0.5, 0.5, 0.5), data);
