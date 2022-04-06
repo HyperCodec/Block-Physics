@@ -36,6 +36,8 @@ public class Main extends JavaPlugin {
         this.saveDefaultConfig();
 
         stableblocks.add(Material.BEDROCK);
+        stableblocks.add(Material.PISTON_HEAD);
+        stableblocks.add(Material.MOVING_PISTON);
         stableblocks.add(Material.BARRIER);
         stableblocks.add(Material.OBSIDIAN);
         stableblocks.add(Material.CRYING_OBSIDIAN);
@@ -239,7 +241,9 @@ public class Main extends JavaPlugin {
 
                         FallingBlock fblock = nblock.getWorld().spawnFallingBlock(nblock.getLocation().add(0.5, 0.5, 0.5), data);
                         fblock.getPersistentDataContainer().set(new NamespacedKey(plugin, "eventid"), PersistentDataType.STRING, uuid.toString());
-                        updateNearbyBlocks(nblock, false, uuid);
+                        if(plugin.getConfig().getBoolean("chainupdates")) {
+                            updateNearbyBlocks(nblock, false, uuid);
+                        }
                     }
                 }
             }
