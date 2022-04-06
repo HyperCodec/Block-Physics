@@ -106,6 +106,7 @@ public class Main extends JavaPlugin {
         unstableblocks.add(Material.PURPLE_CARPET);
         unstableblocks.add(Material.WHITE_CARPET);
         unstableblocks.add(Material.YELLOW_CARPET);
+        unstableblocks.add(Material.KELP);
         unstableblocks.add(Material.KELP_PLANT);
         unstableblocks.add(Material.SEAGRASS);
         unstableblocks.add(Material.TALL_SEAGRASS);
@@ -225,7 +226,7 @@ public class Main extends JavaPlugin {
 
                 for(Location nlocation : affectedblocks) {
                     Block nblock = nlocation.getWorld().getBlockAt(nlocation);
-                    if (!Main.unstableblocks.contains(nblock.getType()) && Main.unstableblocks.contains(nblock.getWorld().getBlockAt(nblock.getX(), nblock.getY() - 1, nblock.getZ()).getType()) && !Main.stableblocks.contains(nblock.getType())) {
+                    if (!unstableblocks.contains(nblock.getType()) && unstableblocks.contains(nblock.getWorld().getBlockAt(nblock.getX(), nblock.getY() - 1, nblock.getZ()).getType()) && !stableblocks.contains(nblock.getType())) {
                         iterations.put(uuid, iterations.get(uuid) + 1);
                         if(plugin.getConfig().getInt("maxaffectedblocks") != 0 && iterations.get(uuid) > plugin.getConfig().getInt("maxaffectedblocks")) {
                             return;
