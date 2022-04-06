@@ -108,6 +108,9 @@ public class Main extends JavaPlugin {
         unstableblocks.add(Material.YELLOW_CARPET);
         unstableblocks.add(Material.KELP_PLANT);
         unstableblocks.add(Material.SEAGRASS);
+        unstableblocks.add(Material.TALL_SEAGRASS);
+        unstableblocks.add(Material.GRASS);
+        unstableblocks.add(Material.TALL_GRASS);
         unstableblocks.add(Material.SEA_PICKLE);
         unstableblocks.add(Material.CAKE);
         unstableblocks.add(Material.BAMBOO_SAPLING);
