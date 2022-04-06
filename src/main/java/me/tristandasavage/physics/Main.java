@@ -194,7 +194,7 @@ public class Main extends JavaPlugin {
         unstableblocks.add(Material.VINE);
         unstableblocks.add(Material.DEAD_BUSH);
 
-        this.getLogger().info("Block Physics v1.3 loaded");
+        this.getLogger().info("Block Physics v1.4 loaded");
     }
     public static void updateNearbyBlocks(Block block, boolean includeself, UUID uuid) {
         new BukkitRunnable() {
