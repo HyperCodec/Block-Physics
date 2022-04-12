@@ -2,3 +2,4 @@ maxaffectedblocks: 5000 # The maximum amount of blocks changed before it stops (
 chainupdates: true # Whether or not blocks update each other at all (useful against lag and with autoupdates)
 fallingblocksupdate: true # Whether or not the falling blocks landing can cause stuff to fall (a bit laggy)
 autoupdatedistance: 5 # Distance from players that blocks autoupdate (0 to disable)
+realisticexplosions: true # Whether or not explosions have realistic qualities to them

@@ -1,6 +1,6 @@
 name: Block-Physics
-main: me.tristandasavage.physics.Main
+main: me.hypercodec.physics.Main
 version: 1.4
-author: TristanDaSavage
+author: HyperCodec
 api-version: 1.18
 description: "Makes blocks act like sand"

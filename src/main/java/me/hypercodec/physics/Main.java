@@ -1,4 +1,4 @@
-package me.tristandasavage.physics;
+package me.hypercodec.physics;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -12,7 +12,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
-import java.util.logging.Level;
 
 public class Main extends JavaPlugin {
     public static Main plugin;
@@ -36,6 +35,9 @@ public class Main extends JavaPlugin {
         this.saveDefaultConfig();
 
         stableblocks.add(Material.BEDROCK);
+        stableblocks.add(Material.COMMAND_BLOCK);
+        stableblocks.add(Material.CHAIN_COMMAND_BLOCK);
+        stableblocks.add(Material.REPEATING_COMMAND_BLOCK);
         stableblocks.add(Material.PISTON_HEAD);
         stableblocks.add(Material.MOVING_PISTON);
         stableblocks.add(Material.BARRIER);
@@ -107,6 +109,7 @@ public class Main extends JavaPlugin {
         unstableblocks.add(Material.WHITE_CARPET);
         unstableblocks.add(Material.YELLOW_CARPET);
         unstableblocks.add(Material.KELP);
+        unstableblocks.add(Material.ALLIUM);
         unstableblocks.add(Material.KELP_PLANT);
         unstableblocks.add(Material.SEAGRASS);
         unstableblocks.add(Material.TALL_SEAGRASS);
@@ -152,6 +155,9 @@ public class Main extends JavaPlugin {
         unstableblocks.add(Material.CACTUS);
         unstableblocks.add(Material.LEVER);
         unstableblocks.add(Material.SNOW);
+        unstableblocks.add(Material.RED_TULIP);
+        unstableblocks.add(Material.ORANGE_TULIP);
+        unstableblocks.add(Material.PINK_TULIP);
         unstableblocks.add(Material.END_ROD);
         unstableblocks.add(Material.CHORUS_FLOWER);
         unstableblocks.add(Material.CHORUS_FRUIT);
