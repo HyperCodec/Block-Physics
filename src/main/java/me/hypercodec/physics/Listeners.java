@@ -132,7 +132,7 @@ public class Listeners implements Listener {
 
                     Main.iterations.put(uuid, Main.iterations.get(uuid) + 1);
 
-                    Main.updateNearbyBlocks(block, false, uuid);
+                    if(Main.plugin.getConfig().getBoolean("explosionupdates")) {Main.updateNearbyBlocks(block, false, uuid);}
                 }
             }
         }
