@@ -1,5 +1,6 @@
 package me.hypercodec.physics;
 
+import com.jeff_media.customblockdata.CustomBlockData;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -232,7 +233,7 @@ public class Main extends JavaPlugin {
 
                 for(Location nlocation : affectedblocks) {
                     Block nblock = nlocation.getWorld().getBlockAt(nlocation);
-                    if (!unstableblocks.contains(nblock.getType()) && unstableblocks.contains(nblock.getWorld().getBlockAt(nblock.getX(), nblock.getY() - 1, nblock.getZ()).getType()) && !stableblocks.contains(nblock.getType())) {
+                    if (!unstableblocks.contains(nblock.getType()) && unstableblocks.contains(nblock.getWorld().getBlockAt(nblock.getX(), nblock.getY() - 1, nblock.getZ()).getType()) && !stableblocks.contains(nblock.getType()) && !new CustomBlockData(nblock, plugin).has(new NamespacedKey(plugin, "ignorephysics"), PersistentDataType.INTEGER)) {
                         iterations.put(uuid, iterations.get(uuid) + 1);
                         if(plugin.getConfig().getInt("maxaffectedblocks") != 0 && iterations.get(uuid) > plugin.getConfig().getInt("maxaffectedblocks")) {
                             return;
