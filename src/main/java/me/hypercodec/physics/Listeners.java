@@ -35,7 +35,7 @@ public class Listeners implements Listener {
                 }
             }.runTaskLater(Main.plugin, Main.plugin.getConfig().getInt("maxaffectedblocks") + 20);
         }
-        if (!event.getPlayer().isSneaking() || !Main.plugin.getConfig().getBoolean("shiftignorephysics")) {
+        if (!event.getPlayer().isSneaking() || !Main.plugin.getConfig().getBoolean("shiftignorephysics") && event.getPlayer().hasPermission("blockphysics.shiftclick")) {
             Main.updateNearbyBlocks(event.getBlock(), true, uuid);
             return;
         }

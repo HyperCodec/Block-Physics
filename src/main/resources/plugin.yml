@@ -4,3 +4,10 @@ version: 1.5
 author: HyperCodec
 api-version: 1.18
 description: "Makes blocks act like sand"
+
+permissions:
+  blockphysics.*:
+    blockphysics.shiftclick: true
+
+  blockphysics.shiftclick:
+    default: true
