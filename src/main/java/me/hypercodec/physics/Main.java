@@ -84,6 +84,7 @@ public class Main extends JavaPlugin {
         stableblocks.add(Material.YELLOW_BED);
 
         unstableblocks.add(Material.COBWEB);
+        unstableblocks.add(Material.FIRE);
         unstableblocks.add(Material.RAIL);
         unstableblocks.add(Material.ACTIVATOR_RAIL);
         unstableblocks.add(Material.DETECTOR_RAIL);
