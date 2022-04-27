@@ -1,6 +1,6 @@
 name: Block-Physics
 main: me.hypercodec.physics.Main
-version: 1.4
+version: 1.5
 author: HyperCodec
 api-version: 1.18
 description: "Makes blocks act like sand"
