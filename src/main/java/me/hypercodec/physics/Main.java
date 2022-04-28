@@ -1,13 +1,12 @@
 package me.hypercodec.physics;
 
 import com.jeff_media.customblockdata.CustomBlockData;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Snowable;
 import org.bukkit.entity.FallingBlock;
+import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -84,6 +83,7 @@ public class Main extends JavaPlugin {
         stableblocks.add(Material.YELLOW_BED);
 
         unstableblocks.add(Material.COBWEB);
+        unstableblocks.add(Material.LILY_PAD);
         unstableblocks.add(Material.FIRE);
         unstableblocks.add(Material.RAIL);
         unstableblocks.add(Material.ACTIVATOR_RAIL);
@@ -205,6 +205,34 @@ public class Main extends JavaPlugin {
         unstableblocks.add(Material.DEAD_BUBBLE_CORAL_WALL_FAN);
         unstableblocks.add(Material.VINE);
         unstableblocks.add(Material.DEAD_BUSH);
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                for(Player player : Bukkit.getOnlinePlayers()) {
+                    if(Main.plugin.getConfig().getInt("autoupdatedistance") != 0 && player.getGameMode() != GameMode.SPECTATOR) {
+                        UUID uuid = UUID.randomUUID();
+                        Main.iterations.put(uuid, 0);
+                        if(Main.plugin.getConfig().getInt("maxaffectedblocks") != 0) {
+                            new BukkitRunnable() {
+                                @Override
+                                public void run() {
+                                    Main.iterations.remove(uuid);
+                                    this.cancel();
+                                }
+                            }.runTaskLater(Main.plugin, Main.plugin.getConfig().getInt("maxaffectedblocks") + 20);
+                        }
+                        for(int x = player.getLocation().getBlockX() - Main.plugin.getConfig().getInt("autoupdatedistance");x <= player.getLocation().getBlockX() + Main.plugin.getConfig().getInt("autoupdatedistance");x++) {
+                            for(int y = player.getLocation().getBlockY() - Main.plugin.getConfig().getInt("autoupdatedistance");y <= player.getLocation().getBlockY() + Main.plugin.getConfig().getInt("autoupdatedistance");y++) {
+                                for(int z = player.getLocation().getBlockZ() - Main.plugin.getConfig().getInt("autoupdatedistance");z <= player.getLocation().getBlockZ() + Main.plugin.getConfig().getInt("autoupdatedistance");z++) {
+                                    Main.updateNearbyBlocks(player.getWorld().getBlockAt(x, y, z), true, uuid);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }.runTaskTimer(this, 20, 20);
 
         this.getLogger().info("Block Physics v1.5 loaded");
     }

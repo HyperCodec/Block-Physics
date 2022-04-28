@@ -80,30 +80,6 @@ public class Listeners implements Listener {
     }
 
     @EventHandler(ignoreCancelled = true)
-    public void onPlayerMove(PlayerMoveEvent event) {
-        if(Main.plugin.getConfig().getInt("autoupdatedistance") != 0 && event.getPlayer().getGameMode() != GameMode.SPECTATOR) {
-            UUID uuid = UUID.randomUUID();
-            Main.iterations.put(uuid, 0);
-            if(Main.plugin.getConfig().getInt("maxaffectedblocks") != 0) {
-                new BukkitRunnable() {
-                    @Override
-                    public void run() {
-                        Main.iterations.remove(uuid);
-                        this.cancel();
-                    }
-                }.runTaskLater(Main.plugin, Main.plugin.getConfig().getInt("maxaffectedblocks") + 20);
-            }
-            for(int x = event.getTo().getBlockX() - Main.plugin.getConfig().getInt("autoupdatedistance");x <= event.getTo().getBlockX() + Main.plugin.getConfig().getInt("autoupdatedistance");x++) {
-                for(int y = event.getTo().getBlockY() - Main.plugin.getConfig().getInt("autoupdatedistance");y <= event.getTo().getBlockY() + Main.plugin.getConfig().getInt("autoupdatedistance");y++) {
-                    for(int z = event.getTo().getBlockZ() - Main.plugin.getConfig().getInt("autoupdatedistance");z <= event.getTo().getBlockZ() + Main.plugin.getConfig().getInt("autoupdatedistance");z++) {
-                        Main.updateNearbyBlocks(event.getTo().getWorld().getBlockAt(x, y, z), true, uuid);
-                    }
-                }
-            }
-        }
-    }
-
-    @EventHandler(ignoreCancelled = true)
     public void onEntityExplode(EntityExplodeEvent event) {
         if(Main.plugin.getConfig().getBoolean("realisticexplosions")) {
             UUID uuid = UUID.randomUUID();
