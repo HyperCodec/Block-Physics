@@ -2,18 +2,23 @@ package me.hypercodec.physics;
 
 import com.jeff_media.customblockdata.CustomBlockData;
 import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.block.data.Levelled;
 import org.bukkit.block.data.Snowable;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.*;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
+import org.bukkit.event.entity.EntityDropItemEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
@@ -117,5 +122,16 @@ public class Listeners implements Listener {
     @EventHandler
     public void onBlockExplode(BlockExplodeEvent event) {
         event.setCancelled(true);
+    }
+
+    @EventHandler(ignoreCancelled = true)
+    public void onEntityDropItem(EntityDropItemEvent event) {
+        if(event.getEntity().getType() == EntityType.FALLING_BLOCK && !Main.plugin.getConfig().getBoolean("unsolidblocksbreakfbs")) {
+            event.setCancelled(true);
+            Material mat = event.getEntity().getLocation().getBlock().getLocation().getBlock().getType();
+            event.getEntity().getLocation().getBlock().getLocation().getBlock().setBlockData(((FallingBlock) event.getEntity()).getBlockData());
+            event.getEntity().remove();
+            event.getEntity().getLocation().getWorld().dropItemNaturally(event.getEntity().getLocation(), new ItemStack(mat));
+        }
     }
 }

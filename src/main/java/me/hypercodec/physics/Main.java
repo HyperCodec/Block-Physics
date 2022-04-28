@@ -205,7 +205,9 @@ public class Main extends JavaPlugin {
         unstableblocks.add(Material.DEAD_BUBBLE_CORAL_WALL_FAN);
         unstableblocks.add(Material.VINE);
         unstableblocks.add(Material.DEAD_BUSH);
-
+        unstableblocks.add(Material.FERN);
+        unstableblocks.add(Material.LARGE_FERN);
+        
         new BukkitRunnable() {
             @Override
             public void run() {
