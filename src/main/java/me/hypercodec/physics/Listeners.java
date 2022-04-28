@@ -127,11 +127,13 @@ public class Listeners implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void onEntityDropItem(EntityDropItemEvent event) {
         if(event.getEntity().getType() == EntityType.FALLING_BLOCK && !Main.plugin.getConfig().getBoolean("unsolidblocksbreakfbs")) {
-            event.setCancelled(true);
-            Material mat = event.getEntity().getLocation().getBlock().getLocation().getBlock().getType();
-            event.getEntity().getLocation().getBlock().getLocation().getBlock().setBlockData(((FallingBlock) event.getEntity()).getBlockData());
-            event.getEntity().remove();
-            event.getEntity().getLocation().getWorld().dropItemNaturally(event.getEntity().getLocation(), new ItemStack(mat));
+            try {
+                event.setCancelled(true);
+                event.getEntity().getLocation().getWorld().dropItemNaturally(event.getEntity().getLocation(), new ItemStack(event.getEntity().getLocation().getBlock().getLocation().getBlock().getType()));
+                event.getEntity().getLocation().getBlock().getLocation().getBlock().setBlockData(((FallingBlock) event.getEntity()).getBlockData());
+                event.getEntity().remove();
+            }
+            catch(IllegalArgumentException ignored) {}
         }
     }
 }
