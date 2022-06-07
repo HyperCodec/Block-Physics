@@ -2,7 +2,6 @@ package me.hypercodec.physics;
 
 import com.jeff_media.customblockdata.CustomBlockData;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Snowable;

@@ -44,6 +44,8 @@ public class Main extends JavaPlugin {
         stableblocks.add(Material.COMMAND_BLOCK);
         stableblocks.add(Material.CHAIN_COMMAND_BLOCK);
         stableblocks.add(Material.REPEATING_COMMAND_BLOCK);
+        stableblocks.add(Material.STRUCTURE_BLOCK);
+        stableblocks.add(Material.JIGSAW);
         stableblocks.add(Material.PISTON_HEAD);
         stableblocks.add(Material.MOVING_PISTON);
         stableblocks.add(Material.BARRIER);
