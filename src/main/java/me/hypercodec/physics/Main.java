@@ -228,7 +228,7 @@ public class Main extends JavaPlugin {
                         for(int x = player.getLocation().getBlockX() - Main.plugin.getConfig().getInt("autoupdatedistance");x <= player.getLocation().getBlockX() + Main.plugin.getConfig().getInt("autoupdatedistance");x++) {
                             for(int y = player.getLocation().getBlockY() - Main.plugin.getConfig().getInt("autoupdatedistance");y <= player.getLocation().getBlockY() + Main.plugin.getConfig().getInt("autoupdatedistance");y++) {
                                 for(int z = player.getLocation().getBlockZ() - Main.plugin.getConfig().getInt("autoupdatedistance");z <= player.getLocation().getBlockZ() + Main.plugin.getConfig().getInt("autoupdatedistance");z++) {
-                                    Main.updateNearbyBlocks(player.getWorld().getBlockAt(x, y, z), true, uuid);
+                                    Main.updateBlock(player.getWorld().getBlockAt(x, y, z), true, uuid);
                                 }
                             }
                         }
@@ -239,53 +239,32 @@ public class Main extends JavaPlugin {
 
         this.getLogger().info("Block Physics v1.5 loaded");
     }
-    public static void updateNearbyBlocks(Block block, boolean includeself, UUID uuid) {
+    public static void updateBlock(Block block, boolean includeself, UUID uuid) {
         new BukkitRunnable() {
             @Override
             public void run() {
-                Set<Location> affectedblocks = new HashSet<>();
-                if(includeself) {
-                    affectedblocks.add(block.getLocation());
-                }
-                affectedblocks.add(block.getLocation().subtract(1, 0, 0));
-                affectedblocks.add(block.getLocation().subtract(1, 0, 1));
-                affectedblocks.add(block.getLocation().subtract(0, 0, 1));
-                affectedblocks.add(block.getLocation().subtract(1, 1, 0));
-                affectedblocks.add(block.getLocation().subtract(0, 1, 1));
-                affectedblocks.add(block.getLocation().subtract(1, 1, 1));
-                affectedblocks.add(block.getLocation().add(1, 0, 0));
-                affectedblocks.add(block.getLocation().add(1, 0, 1));
-                affectedblocks.add(block.getLocation().add(0, 0, 1));
-                affectedblocks.add(block.getLocation().add(0, 1, 0));
-                affectedblocks.add(block.getLocation().add(1, 1, 0));
-                affectedblocks.add(block.getLocation().add(0, 1, 1));
-                affectedblocks.add(block.getLocation().add(1, 1, 1));
-                affectedblocks.add(block.getLocation().add(0, -1, 1));
-                affectedblocks.add(block.getLocation().add(1, -1, 0));
+                for(int x = -1;x <= 1; x++) {
+                    for(int y = -1; y <= 1; y++) {
+                        for (int z = -1; z <= 1; z++) {
+                            Location nlocation = block.getLocation().add(x, y, z);
+                            Block nblock = nlocation.getWorld().getBlockAt(nlocation);
+                            if (!(!includeself && nblock == block) && !unstableblocks.contains(nblock.getType()) && unstableblocks.contains(nblock.getWorld().getBlockAt(nblock.getX(), nblock.getY() - 1, nblock.getZ()).getType()) && !stableblocks.contains(nblock.getType()) && !new CustomBlockData(nblock, plugin).has(new NamespacedKey(plugin, "ignorephysics"), PersistentDataType.INTEGER)) {
+                                iterations.put(uuid, iterations.get(uuid) + 1);
+                                if (plugin.getConfig().getInt("maxaffectedblocks") != 0 && iterations.get(uuid) > plugin.getConfig().getInt("maxaffectedblocks")) {return;}
 
-                for(Location nlocation : affectedblocks) {
-                    Block nblock = nlocation.getWorld().getBlockAt(nlocation);
-                    if (!unstableblocks.contains(nblock.getType()) && unstableblocks.contains(nblock.getWorld().getBlockAt(nblock.getX(), nblock.getY() - 1, nblock.getZ()).getType()) && !stableblocks.contains(nblock.getType()) && !new CustomBlockData(nblock, plugin).has(new NamespacedKey(plugin, "ignorephysics"), PersistentDataType.INTEGER)) {
-                        iterations.put(uuid, iterations.get(uuid) + 1);
-                        if(plugin.getConfig().getInt("maxaffectedblocks") != 0 && iterations.get(uuid) > plugin.getConfig().getInt("maxaffectedblocks")) {
-                            return;
-                        }
-                        BlockData data = nblock.getBlockData();
+                                BlockData data = nblock.getBlockData();
 
-                        if(data instanceof Snowable) {
-                            ((Snowable) data).setSnowy(false);
-                        }
+                                if (data instanceof Snowable) {((Snowable) data).setSnowy(false);}
 
-                        if(data.getMaterial() == Material.POWDER_SNOW) {
-                            data = Material.SNOW_BLOCK.createBlockData();
-                        }
+                                if (data.getMaterial() == Material.POWDER_SNOW) {data = Material.SNOW_BLOCK.createBlockData();}
 
-                        nblock.setType(Material.AIR);
+                                nblock.setType(Material.AIR);
 
-                        FallingBlock fblock = nblock.getWorld().spawnFallingBlock(nblock.getLocation().add(0.5, 0.5, 0.5), data);
-                        fblock.getPersistentDataContainer().set(new NamespacedKey(plugin, "eventid"), PersistentDataType.STRING, uuid.toString());
-                        if(plugin.getConfig().getBoolean("chainupdates")) {
-                            updateNearbyBlocks(nblock, false, uuid);
+                                FallingBlock fblock = nblock.getWorld().spawnFallingBlock(nblock.getLocation().add(0.5, 0.5, 0.5), data);
+                                fblock.getPersistentDataContainer().set(new NamespacedKey(plugin, "eventid"), PersistentDataType.STRING, uuid.toString());
+
+                                if (plugin.getConfig().getBoolean("chainupdates")) {updateBlock(nblock, false, uuid);}
+                            }
                         }
                     }
                 }

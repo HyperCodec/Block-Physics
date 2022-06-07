@@ -1,13 +1,10 @@
 package me.hypercodec.physics;
 
 import com.jeff_media.customblockdata.CustomBlockData;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
-import org.bukkit.block.data.Levelled;
 import org.bukkit.block.data.Snowable;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FallingBlock;
@@ -17,7 +14,6 @@ import org.bukkit.event.block.*;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.entity.EntityDropItemEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -41,12 +37,12 @@ public class BlockPhysicsListener implements Listener {
             }.runTaskLater(Main.plugin, Main.plugin.getConfig().getInt("maxaffectedblocks") + 20);
         }
         if (!event.getPlayer().isSneaking() || !Main.plugin.getConfig().getBoolean("shiftignorephysics") && event.getPlayer().hasPermission("blockphysics.shiftclick")) {
-            Main.updateNearbyBlocks(event.getBlock(), true, uuid);
+            Main.updateBlock(event.getBlock(), true, uuid);
             return;
         }
 
         new CustomBlockData(event.getBlock(), Main.plugin).set(new NamespacedKey(Main.plugin, "ignorephysics"), PersistentDataType.INTEGER, 1);
-        Main.updateNearbyBlocks(event.getBlock(), false, uuid);
+        Main.updateBlock(event.getBlock(), false, uuid);
     }
 
     @EventHandler(ignoreCancelled = true)
@@ -62,7 +58,7 @@ public class BlockPhysicsListener implements Listener {
                 }
             }.runTaskLater(Main.plugin, Main.plugin.getConfig().getInt("maxaffectedblocks") + 20);
         }
-        Main.updateNearbyBlocks(event.getBlock(), false, uuid);
+        Main.updateBlock(event.getBlock(), false, uuid);
     }
 
     @EventHandler(ignoreCancelled = true)
@@ -79,7 +75,7 @@ public class BlockPhysicsListener implements Listener {
                         }
                     }.runTaskLater(Main.plugin, Main.plugin.getConfig().getInt("maxaffectedblocks") + 20);
                 }
-                Main.updateNearbyBlocks(event.getBlock(), false, uuid);
+                Main.updateBlock(event.getBlock(), false, uuid);
             }
         }
     }
@@ -113,7 +109,7 @@ public class BlockPhysicsListener implements Listener {
 
                     Main.iterations.put(uuid, Main.iterations.get(uuid) + 1);
 
-                    if(Main.plugin.getConfig().getBoolean("explosionupdates")) {Main.updateNearbyBlocks(block, false, uuid);}
+                    if(Main.plugin.getConfig().getBoolean("explosionupdates")) {Main.updateBlock(block, false, uuid);}
                 }
             }
         }
