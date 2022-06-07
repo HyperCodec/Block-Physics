@@ -18,7 +18,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
-import org.checkerframework.checker.units.qual.C;
 
 import java.util.UUID;
 
@@ -119,9 +118,7 @@ public class BlockPhysicsListener implements Listener {
     }
 
     @EventHandler
-    public void onBlockExplode(BlockExplodeEvent event) {
-        event.setCancelled(true);
-    }
+    public void onBlockExplode(BlockExplodeEvent event) {if(Main.plugin.getConfig().getBoolean("realisticexplosions")) {event.setCancelled(true);}}
 
     @EventHandler(ignoreCancelled = true)
     public void onEntityDropItem(EntityDropItemEvent event) {
