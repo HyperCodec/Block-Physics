@@ -25,7 +25,7 @@ import org.bukkit.util.Vector;
 
 import java.util.UUID;
 
-public class Listeners implements Listener {
+public class BlockPhysicsListener implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void onBlockPlace(BlockPlaceEvent event) {
         UUID uuid = UUID.randomUUID();

@@ -30,7 +30,7 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         plugin = this;
 
-        this.getServer().getPluginManager().registerEvents(new Listeners(), this);
+        this.getServer().getPluginManager().registerEvents(new BlockPhysicsListener(), this);
 
         this.saveDefaultConfig();
 
@@ -207,6 +207,7 @@ public class Main extends JavaPlugin {
         unstableblocks.add(Material.DEAD_BUSH);
         unstableblocks.add(Material.FERN);
         unstableblocks.add(Material.LARGE_FERN);
+        unstableblocks.add(Material.BUBBLE_COLUMN);
 
         new BukkitRunnable() {
             @Override
