@@ -21,6 +21,9 @@ public class Main extends JavaPlugin {
 
     public static Map<UUID, Integer> iterations = new HashMap<>();
 
+    public static NamespacedKey ignorephysicskey;
+    public static NamespacedKey eventidkey;
+
     @Override
     public void onDisable() {
         this.getLogger().info("Block Physics plugin unloaded");
@@ -33,6 +36,9 @@ public class Main extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new BlockPhysicsListener(), this);
 
         this.saveDefaultConfig();
+
+        ignorephysicskey = new NamespacedKey(plugin, "ignorephysics");
+        eventidkey = new NamespacedKey(plugin, "eventid");
 
         stableblocks.add(Material.BEDROCK);
         stableblocks.add(Material.COMMAND_BLOCK);

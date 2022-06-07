@@ -18,6 +18,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
+import org.checkerframework.checker.units.qual.C;
 
 import java.util.UUID;
 
@@ -41,12 +42,14 @@ public class BlockPhysicsListener implements Listener {
             return;
         }
 
-        new CustomBlockData(event.getBlock(), Main.plugin).set(new NamespacedKey(Main.plugin, "ignorephysics"), PersistentDataType.INTEGER, 1);
+        new CustomBlockData(event.getBlock(), Main.plugin).set(Main.ignorephysicskey, PersistentDataType.INTEGER, 1);
         Main.updateBlock(event.getBlock(), false, uuid);
     }
 
     @EventHandler(ignoreCancelled = true)
     public void onBlockBreak(BlockBreakEvent event) {
+        if(new CustomBlockData(event.getBlock(), Main.plugin).has(Main.ignorephysicskey, PersistentDataType.INTEGER)) {new CustomBlockData(event.getBlock(), Main.plugin).remove(Main.ignorephysicskey);}
+
         UUID uuid = UUID.randomUUID();
         Main.iterations.put(uuid, 0);
         if (Main.plugin.getConfig().getInt("maxaffectedblocks") != 0) {
@@ -64,8 +67,8 @@ public class BlockPhysicsListener implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void onEntityChangeBlock(EntityChangeBlockEvent event) {
         if(event.getEntity() instanceof FallingBlock) {
-            if(event.getEntity().getPersistentDataContainer().has(new NamespacedKey(Main.plugin, "eventid"), PersistentDataType.STRING) && Main.plugin.getConfig().getBoolean("fallingblocksupdate") && Main.plugin.getConfig().getBoolean("chainupdates")) {
-                UUID uuid = UUID.fromString(event.getEntity().getPersistentDataContainer().get(new NamespacedKey(Main.plugin, "eventid"), PersistentDataType.STRING));
+            if(event.getEntity().getPersistentDataContainer().has(Main.eventidkey, PersistentDataType.STRING) && Main.plugin.getConfig().getBoolean("fallingblocksupdate") && Main.plugin.getConfig().getBoolean("chainupdates")) {
+                UUID uuid = UUID.fromString(event.getEntity().getPersistentDataContainer().get(Main.eventidkey, PersistentDataType.STRING));
                 if(Main.plugin.getConfig().getInt("maxaffectedblocks") != 0) {
                     new BukkitRunnable() {
                         @Override
@@ -103,7 +106,7 @@ public class BlockPhysicsListener implements Listener {
                     block.setType(Material.AIR);
 
                     FallingBlock fb = event.getLocation().getWorld().spawnFallingBlock(block.getLocation(), data);
-                    fb.getPersistentDataContainer().set(new NamespacedKey(Main.plugin, "eventid"), PersistentDataType.STRING, uuid.toString());
+                    fb.getPersistentDataContainer().set(Main.eventidkey, PersistentDataType.STRING, uuid.toString());
                     fb.setHurtEntities(true);
                     fb.setVelocity(yeetvec);
 
