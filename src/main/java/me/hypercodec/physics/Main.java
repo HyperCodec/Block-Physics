@@ -24,6 +24,8 @@ public class Main extends JavaPlugin {
     public static NamespacedKey ignorephysicskey;
     public static NamespacedKey eventidkey;
 
+    double version = 1.6;
+
     @Override
     public void onDisable() {
         this.getLogger().info("Block Physics plugin unloaded");
@@ -245,7 +247,7 @@ public class Main extends JavaPlugin {
             }
         }.runTaskTimer(this, 20, 20);
 
-        this.getLogger().info("Block Physics v1.5 loaded");
+        this.getLogger().info("Block Physics v" + version + " loaded");
     }
     public static void updateBlock(Block block, boolean includeself, UUID uuid) {
         new BukkitRunnable() {
