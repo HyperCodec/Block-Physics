@@ -1,8 +1,9 @@
 maxaffectedblocks: 5000 # The maximum amount of blocks changed before it stops (0 for infinite, which is rlly laggy)
 chainupdates: true # Whether or not blocks update each other at all (useful against lag and with autoupdates)
 fallingblocksupdate: true # Whether or not the falling blocks landing can cause stuff to fall (a bit laggy)
+projectilesupdate: true # Whether or not projectiles can cause updates when they land
 unsolidblocksbreakfbs: false # Whether or not things like flowers and slabs will break falling blocks
 autoupdatedistance: 5 # Distance from players that blocks autoupdate (0 to disable)
 realisticexplosions: true # Whether or not explosions have realistic qualities to them
 explosionupdates: true # Whether or not explosions update nearby blocks (excluding blocks flung from it) (requires realisticexplosions to be true)
-shiftignorephysics: false # Whether or not you can shift click to ignore block physics on the the block placed
+shiftignorephysics: true # Whether or not you can shift click to ignore block physics on the the block placed

@@ -13,6 +13,7 @@ import org.bukkit.event.block.*;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.entity.EntityDropItemEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
+import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -129,6 +130,24 @@ public class BlockPhysicsListener implements Listener {
                 event.getEntity().remove();
             }
             catch(IllegalArgumentException ignored) {}
+        }
+    }
+
+    @EventHandler(ignoreCancelled = true)
+    public void onProjectileHit(ProjectileHitEvent event) {
+        if(Main.plugin.getConfig().getBoolean("projectilesupdate") && event.getHitBlock() != null) {
+            UUID uuid = UUID.randomUUID();
+            Main.iterations.put(uuid, 0);
+            if (Main.plugin.getConfig().getInt("maxaffectedblocks") != 0) {
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        Main.iterations.remove(uuid);
+                        this.cancel();
+                    }
+                }.runTaskLater(Main.plugin, Main.plugin.getConfig().getInt("maxaffectedblocks") + 20);
+            }
+            Main.updateBlock(event.getHitBlock(), true, uuid);
         }
     }
 }
