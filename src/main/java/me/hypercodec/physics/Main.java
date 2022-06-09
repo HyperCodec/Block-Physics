@@ -28,7 +28,7 @@ public class Main extends JavaPlugin {
     public static NamespacedKey explodedkey;
     public static NamespacedKey explosionparticleskey;
 
-    double version = 1.6;
+    double version = 1.7;
 
     @Override
     public void onDisable() {
