@@ -3,6 +3,7 @@ package me.hypercodec.physics;
 import com.jeff_media.customblockdata.CustomBlockData;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.TileState;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Snowable;
 import org.bukkit.entity.EntityType;
@@ -124,10 +125,10 @@ public class BlockPhysicsListener implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onEntityDropItem(EntityDropItemEvent event) {
-        if(event.getEntity().getType() == EntityType.FALLING_BLOCK && !Main.plugin.getConfig().getBoolean("unsolidblocksbreakfbs")) {
+        if(event.getEntity().getType() == EntityType.FALLING_BLOCK && !Main.plugin.getConfig().getBoolean("unsolidblocksbreakfbs") && !(event.getEntity().getLocation().getBlock().getState() instanceof TileState)) {
             try {
                 event.setCancelled(true);
-                event.getEntity().getLocation().getWorld().dropItemNaturally(event.getEntity().getLocation(), new ItemStack(event.getEntity().getLocation().getBlock().getLocation().getBlock().getType()));
+                event.getEntity().getLocation().getWorld().dropItemNaturally(event.getEntity().getLocation(), new ItemStack(event.getEntity().getLocation().getBlock().getType()));
                 event.getEntity().getLocation().getBlock().getLocation().getBlock().setBlockData(((FallingBlock) event.getEntity()).getBlockData());
                 event.getEntity().remove();
             }
