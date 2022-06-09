@@ -14,6 +14,7 @@ import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.entity.EntityDropItemEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -106,6 +107,7 @@ public class BlockPhysicsListener implements Listener {
 
                     FallingBlock fb = event.getLocation().getWorld().spawnFallingBlock(block.getLocation(), data);
                     fb.getPersistentDataContainer().set(Main.eventidkey, PersistentDataType.STRING, uuid.toString());
+                    fb.getPersistentDataContainer().set(Main.explodedkey, PersistentDataType.INTEGER, 1);
                     fb.setHurtEntities(true);
                     fb.setVelocity(yeetvec);
 
@@ -150,4 +152,7 @@ public class BlockPhysicsListener implements Listener {
             Main.updateBlock(event.getHitBlock(), true, uuid);
         }
     }
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {if(!event.getPlayer().hasPlayedBefore() && Main.plugin.getConfig().getBoolean("explosionparticlesdefault")) {event.getPlayer().getPersistentDataContainer().set(Main.explosionparticleskey, PersistentDataType.INTEGER, 1);}}
 }

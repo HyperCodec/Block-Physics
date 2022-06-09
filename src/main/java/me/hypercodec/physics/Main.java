@@ -5,6 +5,7 @@ import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Snowable;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataType;
@@ -23,6 +24,8 @@ public class Main extends JavaPlugin {
 
     public static NamespacedKey ignorephysicskey;
     public static NamespacedKey eventidkey;
+    public static NamespacedKey explodedkey;
+    public static NamespacedKey explosionparticleskey;
 
     double version = 1.6;
 
@@ -37,10 +40,15 @@ public class Main extends JavaPlugin {
 
         this.getServer().getPluginManager().registerEvents(new BlockPhysicsListener(), this);
 
+        this.getCommand("explosionparticles").setExecutor(new ExplosionParticles());
+        this.getCommand("explosionparticles").setTabCompleter(new ExplosionParticles());
+
         this.saveDefaultConfig();
 
         ignorephysicskey = new NamespacedKey(plugin, "ignorephysics");
         eventidkey = new NamespacedKey(plugin, "eventid");
+        explodedkey = new NamespacedKey(plugin, "exploded");
+        explosionparticleskey = new NamespacedKey(plugin, "explosionparticles");
 
         stableblocks.add(Material.BEDROCK);
         stableblocks.add(Material.COMMAND_BLOCK);
@@ -246,6 +254,23 @@ public class Main extends JavaPlugin {
                 }
             }
         }.runTaskTimer(this, 20, 20);
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                for(World world : Bukkit.getWorlds()) {
+                    for(Entity entity1 : world.getEntities()) {
+                        if(entity1 instanceof FallingBlock && entity1.getPersistentDataContainer().has(explodedkey, PersistentDataType.INTEGER)) {
+                            for(Entity entity2 : entity1.getNearbyEntities(50, 50, 50)) {
+                                if(entity2 instanceof Player && entity2.getPersistentDataContainer().has(explosionparticleskey, PersistentDataType.INTEGER)) {
+                                    ((Player) entity2).spawnParticle(Particle.CAMPFIRE_COSY_SMOKE, entity1.getLocation(), 1, 0, 0, 0, 0);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }.runTaskTimer(this, 1, 1);
 
         this.getLogger().info("Block Physics v" + version + " loaded");
     }

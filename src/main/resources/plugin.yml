@@ -8,6 +8,19 @@ description: "Makes blocks act like sand"
 permissions:
   blockphysics.*:
     blockphysics.shiftclick: true
+    blockphysics.changegrapgics: true
 
   blockphysics.shiftclick:
     default: true
+
+  blockphysics.changegraphics:
+    default: true
+
+commands:
+  explosionparticles:
+    usage: /explosionparticles <enable|disable>
+    description: Enables/disables smoke particles from realistic explosions
+    permission: blockphysics.changegraphics
+    permission-message: §cYou do not have permission to use this command
+    aliases:
+      - ep
