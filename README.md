@@ -9,6 +9,8 @@
 - realisticexplosions - Whether or not explosions have realistic qualities to them
 - explosionupdates - Whether or not explosions update nearby blocks (excluding blocks flung from it) (requires realisticexplosions to be true)
 - shiftignorephysics - Whether or not you can shift click to ignore block physics on the the block placed
+- stableblocks - A list of materials that will ignore block physics
+- unstableblocks - A list of materials that will not fall, but blocks above can fall if being supported by a member of it
 
 ### Permissions
 - blockphysics.shiftclick - Whether or not the player is able to use shiftignorephysics (allowed by default)
