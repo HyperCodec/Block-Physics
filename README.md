@@ -14,3 +14,4 @@
 
 ### Permissions
 - blockphysics.shiftclick - Whether or not the player is able to use shiftignorephysics (allowed by default)
+- blockphysics.changegraphics - Whether or not the player is able to disable/enable certain detail particles (currently only explosions)
