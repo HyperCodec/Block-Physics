@@ -5,6 +5,7 @@ import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Snowable;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Player;
@@ -40,8 +41,9 @@ public class Main extends JavaPlugin {
 
         this.getServer().getPluginManager().registerEvents(new BlockPhysicsListener(), this);
 
-        this.getCommand("explosionparticles").setExecutor(new ExplosionParticles());
-        this.getCommand("explosionparticles").setTabCompleter(new ExplosionParticles());
+        final PluginCommand ep = this.getCommand("explosionparticles");
+        ep.setExecutor(new ExplosionParticles());
+        ep.setTabCompleter(new ExplosionParticles());
 
         this.saveDefaultConfig();
 
@@ -60,6 +62,7 @@ public class Main extends JavaPlugin {
                 failedtoload = true;
             }
         }
+
         for(String val : this.getConfig().getStringList("unstableblocks")) {
             try {
                 if(stableblocks.contains(Material.valueOf(val))) {
