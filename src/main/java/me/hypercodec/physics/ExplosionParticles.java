@@ -29,7 +29,7 @@ public class ExplosionParticles implements CommandExecutor, TabCompleter {
                 if (((Player) sender).getPersistentDataContainer().has(Main.explosionparticleskey, PersistentDataType.INTEGER)) {
                     ((Player) sender).getPersistentDataContainer().remove(Main.explosionparticleskey);
 
-                    sender.sendMessage("Explosion particles toggled " + ChatColor.RED + "off");
+                    sender.sendMessage("Realistic explosion particles toggled " + ChatColor.RED + "off");
 
                     return true;
                 }
@@ -44,7 +44,7 @@ public class ExplosionParticles implements CommandExecutor, TabCompleter {
             if(args[0].equalsIgnoreCase("enable")) {
                 ((Player) sender).getPersistentDataContainer().set(Main.explosionparticleskey, PersistentDataType.INTEGER, 1);
 
-                sender.sendMessage("Explosion particles " + ChatColor.GREEN + "enabled");
+                sender.sendMessage("Realistic explosion particles " + ChatColor.GREEN + "enabled");
 
                 return true;
             }
@@ -52,7 +52,7 @@ public class ExplosionParticles implements CommandExecutor, TabCompleter {
             if(args[0].equalsIgnoreCase("disable")) {
                 ((Player) sender).getPersistentDataContainer().remove(Main.explosionparticleskey);
 
-                sender.sendMessage("Explosion particles " + ChatColor.RED + "disabled");
+                sender.sendMessage("Realistic explosion particles " + ChatColor.RED + "disabled");
 
                 return true;
             }
