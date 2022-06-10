@@ -80,6 +80,7 @@ stableblocks:
     - WHITE_BED
     - RED_BED
     - YELLOW_BED
+    - REINFORCED_DEEPSLATE
 
 
 # Will not fall and other blocks can fall through them (any block that is either crushable or allows entities to pass through)
@@ -205,3 +206,6 @@ unstableblocks:
     - FERN
     - LARGE_FERN
     - BUBBLE_COLUMN
+    - SCULK_VEIN
+    - MANGROVE_PROPAGULE
+    - POTTED_MANGROVE_PROPAGULE

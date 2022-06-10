@@ -6,7 +6,7 @@
 
     <groupId>me.hypercodec</groupId>
     <artifactId>block-physics</artifactId>
-    <version>1.7</version>
+    <version>1.8</version>
 
     <build>
         <plugins>
@@ -24,7 +24,7 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.1.0</version>
                 <configuration>
-                    <outputDirectory>C:\Users\Tristan Murphy\Documents\MC Plugins\Server 3\plugins</outputDirectory>
+                    <outputDirectory>C:\Users\Tristan Murphy\Documents\MC Plugins\Server 4\plugins</outputDirectory>
                     <finalName>${project.name}</finalName>
                 </configuration>
             </plugin>
@@ -73,7 +73,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.18.2-R0.1-SNAPSHOT</version>
+            <version>1.19-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
